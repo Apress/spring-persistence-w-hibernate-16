@@ -1,5 +1,8 @@
 package com.apress.springpersistence.audiomanager.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
 import java.net.URL;
 
 /**
@@ -7,14 +10,16 @@ import java.net.URL;
  */
 @Entity
 public class Thing {
+    @Id()
+    private URL url;
     private URL additionalType;
     private String alternateName;
     private String description;
     private URL image;
     private String name;
-    private Action potentialAction;
+//    private Action potentialAction;
     private URL sameAs;
-    private URL url;
+
 
     public URL getAdditionalType() {
         return additionalType;
@@ -56,14 +61,14 @@ public class Thing {
         this.name = name;
     }
 
-    public Action getPotentialAction() {
+  /*  public Action getPotentialAction() {
         return potentialAction;
     }
 
     public void setPotentialAction(Action potentialAction) {
         this.potentialAction = potentialAction;
     }
-
+*/
     public URL getSameAs() {
         return sameAs;
     }

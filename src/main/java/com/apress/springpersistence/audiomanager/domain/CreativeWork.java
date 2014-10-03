@@ -16,7 +16,7 @@ public class CreativeWork extends Thing {
     private AggregateRating aggregateRating;
     private String alternativeHeadline;
     private MediaObject associatedMedia;
-    private Audience audience;
+//    private Audience audience;
     private AudioObject audio;
     private Person author;
     private String award;
