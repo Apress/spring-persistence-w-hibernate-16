@@ -73,18 +73,22 @@ public class CreativeWork extends Thing {
     private String keywords;
     private String learningResourceType;
     private URL license;
+    @ManyToOne
     private Thing mentions;
 //    private Offer offers;
     private Integer position;
     @ManyToOne
     private Person provider;
+    @ManyToOne
     private Organization publisher; //Organization
     private URL publishingPrinciples;
+    @ManyToOne
     private Review review;
     @ManyToOne
     private Organization sourceOrganization;
     private String text;
     private URL thumbnail;
+    @ManyToOne
     private Duration timeRequired;
     private String typicalAgeRange;
     private Integer version;

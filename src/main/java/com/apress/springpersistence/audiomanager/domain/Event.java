@@ -17,6 +17,7 @@ public class Event extends Thing {
     @ManyToOne
     private Person attendee;
     private Date doorTime;
+    @ManyToOne
     private Duration duration;
     private Date endDate;
     private EventStatusType eventStatus;
