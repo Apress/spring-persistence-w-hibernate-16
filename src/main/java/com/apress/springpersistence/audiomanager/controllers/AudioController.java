@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -33,8 +34,8 @@ public class AudioController {
     @RequestMapping("/audio")
     @ResponseBody
     @Transactional(readOnly = true)
-    public Page<AudioObject> findAllAudio() {
-        Pageable pageable = new PageRequest(0, 10);
+    public Page<AudioObject> findAllAudio(@RequestParam("page") Integer page) {
+        Pageable pageable = new PageRequest(page, 10);
         return this.audioObjectRepository.findAll(pageable);
 
     }

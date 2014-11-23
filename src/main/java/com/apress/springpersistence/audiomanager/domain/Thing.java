@@ -1,14 +1,13 @@
 package com.apress.springpersistence.audiomanager.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
+import javax.persistence.*;
 import java.net.URL;
 
 /**
  * Created by pfisher on 9/29/14.
  */
 @Entity
+@Inheritance(strategy= InheritanceType.JOINED)
 public class Thing {
     @Id()
     private URL url;
