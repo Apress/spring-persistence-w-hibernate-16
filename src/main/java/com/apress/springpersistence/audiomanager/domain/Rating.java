@@ -11,10 +11,35 @@ import java.net.URL;
 @Entity
 @PrimaryKeyJoinColumn(name="THING_URL")
 public class Rating extends Thing implements Intangible {
-    @Column(name = "THING_URL", nullable = false, unique = true)
-    private URL thingUrl;
+
 
     private Integer bestRating;
     private String ratingValue;
     private Integer worstRating;
+
+
+
+    public Integer getBestRating() {
+        return bestRating;
+    }
+
+    public void setBestRating(Integer bestRating) {
+        this.bestRating = bestRating;
+    }
+
+    public String getRatingValue() {
+        return ratingValue;
+    }
+
+    public void setRatingValue(String ratingValue) {
+        this.ratingValue = ratingValue;
+    }
+
+    public Integer getWorstRating() {
+        return worstRating;
+    }
+
+    public void setWorstRating(Integer worstRating) {
+        this.worstRating = worstRating;
+    }
 }

@@ -13,9 +13,6 @@ import java.util.Date;
 @PrimaryKeyJoinColumn(name="THING_URL")
 public class Organization extends Thing {
 
-    @Column(name = "THING_URL", nullable = false, unique = true)
-    private URL thingUrl; // this is what joins this entity with the Thing entity (essentially thing.url == creativeWork.thing_url
-
 
     @Embedded
     private PostalAddress address;
@@ -56,13 +53,7 @@ public class Organization extends Thing {
     private String telephone;
     private String vatID;
 
-    public URL getThingUrl() {
-        return thingUrl;
-    }
 
-    public void setThingUrl(URL thingUrl) {
-        this.thingUrl = thingUrl;
-    }
 
     public PostalAddress getAddress() {
         return address;

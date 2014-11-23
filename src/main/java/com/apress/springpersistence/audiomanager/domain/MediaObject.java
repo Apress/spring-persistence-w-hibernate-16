@@ -2,10 +2,7 @@ package com.apress.springpersistence.audiomanager.domain;
 
 import com.apress.springpersistence.audiomanager.domain.components.QuantitativeValue;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.*;
 import java.net.URL;
 import java.util.Date;
 
@@ -16,20 +13,18 @@ import java.util.Date;
 @PrimaryKeyJoinColumn(name="THING_URL")
 public class MediaObject extends CreativeWork {
 
-    @PrimaryKeyJoinColumn(name="THING_URL")
-    private URL thingUrl;
 //    private NewsArticle associatedArticle;
     private String bitRate;
     private String contentSize;
     private URL contentUrl;
+    @ManyToOne
     private Duration duration;
     private URL embedUrl;
     @ManyToOne
     private CreativeWork encodesCreativeWork;
     private String encodingFormat;
     private Date expires;
-    @Embedded
-    private QuantitativeValue height;
+    private Integer height;
     private String interactionCount;
 //    private Offer offers;
     private String playerType;
@@ -41,8 +36,7 @@ public class MediaObject extends CreativeWork {
     private Place regionsAllowed;
     private Boolean requiresSubscription;
     private Date uploadDate;
-    @Embedded
-    private QuantitativeValue width;
+    private Integer width;
 
 
     public String getBitRate() {
@@ -109,11 +103,11 @@ public class MediaObject extends CreativeWork {
         this.expires = expires;
     }
 
-    public QuantitativeValue getHeight() {
+    public Integer getHeight() {
         return height;
     }
 
-    public void setHeight(QuantitativeValue height) {
+    public void setHeight(Integer height) {
         this.height = height;
     }
 
@@ -173,11 +167,11 @@ public class MediaObject extends CreativeWork {
         this.uploadDate = uploadDate;
     }
 
-    public QuantitativeValue getWidth() {
+    public Integer getWidth() {
         return width;
     }
 
-    public void setWidth(QuantitativeValue width) {
+    public void setWidth(Integer width) {
         this.width = width;
     }
 }

@@ -13,8 +13,7 @@ import java.util.Date;
 @Entity
 @PrimaryKeyJoinColumn(name="THING_URL")
 public class CreativeWork extends Thing {
-    @Column(name = "THING_URL", nullable = false, unique = true)
-    private URL thingUrl; // this is what joins this entity with the Thing entity (essentially thing.url == creativeWork.thing_url
+
     @ManyToOne
     private Thing about;
     private String accessibilityAPI;
@@ -94,13 +93,7 @@ public class CreativeWork extends Thing {
     private CreativeWork workingExample;
 
 
-    public URL getThingUrl() {
-        return thingUrl;
-    }
 
-    public void setThingUrl(URL thingUrl) {
-        this.thingUrl = thingUrl;
-    }
 
     public Thing getAbout() {
         return about;

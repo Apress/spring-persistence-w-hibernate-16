@@ -1,5 +1,6 @@
 package com.apress.springpersistence.audiomanager.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -12,8 +13,6 @@ import java.net.URL;
 @PrimaryKeyJoinColumn(name="THING_URL")
 public class AggregateRating extends Rating {
 
-    @PrimaryKeyJoinColumn(name="THING_URL")
-    private URL thingUrl;
 
     @ManyToOne
     private Thing itemReviewed;

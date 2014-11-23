@@ -13,8 +13,6 @@ import java.net.URL;
 @PrimaryKeyJoinColumn(name="THING_URL")
 public class Place extends Thing {
 
-    @Column(name = "THING_URL", nullable = false, unique = true)
-    private URL thingUrl; // this is what joins this entity with the Thing entity (essentially thing.url == creativeWork.thing_url
 
     @Embedded
     private PostalAddress address;
@@ -36,13 +34,6 @@ public class Place extends Thing {
     private Review review;
     private String telephone;
 
-    public URL getThingUrl() {
-        return thingUrl;
-    }
-
-    public void setThingUrl(URL thingUrl) {
-        this.thingUrl = thingUrl;
-    }
 
     public PostalAddress getAddress() {
         return address;

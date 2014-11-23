@@ -13,10 +13,6 @@ import java.net.URL;
 @PrimaryKeyJoinColumn(name="THING_URL")
 public class Review extends CreativeWork {
 
-    @Column(name = "THING_URL", nullable = false, unique = true)
-    private URL thingUrl; // this is what joins this entity with the Thing entity (essentially thing.url == creativeWork.thing_url
-
-
     @ManyToOne
     private Thing itemReviewed;
     private String reviewBody;
@@ -24,15 +20,7 @@ public class Review extends CreativeWork {
     private Rating reviewRating;
 
 
-    @Override
-    public URL getThingUrl() {
-        return thingUrl;
-    }
 
-    @Override
-    public void setThingUrl(URL thingUrl) {
-        this.thingUrl = thingUrl;
-    }
 
     public Thing getItemReviewed() {
         return itemReviewed;

@@ -1,5 +1,6 @@
 package com.apress.springpersistence.audiomanager.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import java.net.URL;
@@ -11,8 +12,7 @@ import java.net.URL;
 @PrimaryKeyJoinColumn(name="THING_URL")
 public class Comment extends CreativeWork {
 
-    @PrimaryKeyJoinColumn(name="THING_URL")
-    private URL thingUrl;
+
 
     private Integer downvoteCount;
     private Integer upvoteCount;
@@ -34,11 +34,5 @@ public class Comment extends CreativeWork {
         this.upvoteCount = upvoteCount;
     }
 
-    public URL getThingUrl() {
-        return thingUrl;
-    }
 
-    public void setThingUrl(URL thingUrl) {
-        this.thingUrl = thingUrl;
-    }
 }

@@ -12,22 +12,12 @@ import java.net.URL;
 @PrimaryKeyJoinColumn(name="THING_URL")
 public class EntryPoint extends Thing implements Intangible {
 
-    @Column(name = "THING_URL", nullable = false, unique = true)
-    private URL thingUrl; // this is what joins this entity with the Thing entity (essentially thing.url == creativeWork.thing_url
-
     private String application;
     private String contentType;
     private String encodingType;
     private String httpMethod;
     private String urlTemplate;
 
-    public URL getThingUrl() {
-        return thingUrl;
-    }
-
-    public void setThingUrl(URL thingUrl) {
-        this.thingUrl = thingUrl;
-    }
 
     public String getApplication() {
         return application;

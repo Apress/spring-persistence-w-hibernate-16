@@ -13,12 +13,7 @@ import java.util.Optional;
 @PrimaryKeyJoinColumn(name="THING_URL")
 public class Person extends Thing {
 
-    @Column(name = "THING_URL", nullable = false, unique = true)
-    private URL thingUrl; // this is what joins this entity with the Thing entity (essentially thing.url == creativeWork.thing_url
 
-
-    @Id
-    private Long id;
     @Embedded
     private PersonName name;
 
@@ -35,21 +30,8 @@ public class Person extends Thing {
         return Optional.ofNullable(this.name.getLastName());
     }
 
-    public URL getThingUrl() {
-        return thingUrl;
-    }
 
-    public void setThingUrl(URL thingUrl) {
-        this.thingUrl = thingUrl;
-    }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public PersonName getFullName() {
         return name;

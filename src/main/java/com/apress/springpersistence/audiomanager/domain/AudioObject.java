@@ -11,17 +11,10 @@ import java.net.URL;
 @Entity
 @PrimaryKeyJoinColumn(name="THING_URL")
 public class AudioObject extends MediaObject {
-    @Column(name = "THING_URL", nullable = false, unique = true)
-    private URL thingUrl;
+
     private String transcript;
 
-    public URL getThingUrl() {
-        return thingUrl;
-    }
 
-    public void setThingUrl(URL thingUrl) {
-        this.thingUrl = thingUrl;
-    }
 
     public String getTranscript() {
         return transcript;
