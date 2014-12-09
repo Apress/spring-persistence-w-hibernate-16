@@ -1,6 +1,7 @@
 package com.apress.springpersistence.audiomanager.dao;
 
 import com.apress.springpersistence.audiomanager.domain.Thing;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -18,4 +19,7 @@ public interface ThingRepository extends PagingAndSortingRepository<Thing, URL> 
     public List<Thing> findByName(@Param("name") String name);
 
     public List<Thing> findByName(@Param("name") String name, Pageable pageable);
+
+    public Thing findByUrl(@Param("url") String Url);
+
 }
