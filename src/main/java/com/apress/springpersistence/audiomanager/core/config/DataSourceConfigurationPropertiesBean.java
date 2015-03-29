@@ -6,7 +6,7 @@ import org.springframework.orm.jpa.JpaDialect;
 @ConfigurationProperties(prefix = DataSourceConfigurationPropertiesBean.PREFIX)
 public class DataSourceConfigurationPropertiesBean {
 
-    public static final String PREFIX = "spring.datasource";
+    public static final String PREFIX = "datasource";
 
     private String username;
     private String url;

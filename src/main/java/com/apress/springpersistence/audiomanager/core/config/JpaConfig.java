@@ -7,6 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -26,6 +27,7 @@ import java.util.Properties;
 @Profile("jpa")
 @EnableJpaRepositories("com.apress.springpersistence.audiomanager.core")
 @EnableTransactionManagement
+@PropertySource("classpath:jpa.properties")
 public class JpaConfig {
 
     @Autowired
@@ -35,7 +37,7 @@ public class JpaConfig {
     private DataSourceConfigurationPropertiesBean dataSourceProperties;
 
     @Bean
-    @ConfigurationProperties(prefix = "spring.datasource")
+    @ConfigurationProperties(prefix = "datasource")
     public DataSource dataSource() {
         DataSourceBuilder factory = DataSourceBuilder
                 .create(this.getClass().getClassLoader())
@@ -63,7 +65,7 @@ public class JpaConfig {
         props.put("hibernate.connection.charSet", "UTF-8");
         props.put("hibernate.current_session_context_class", "jta");
         props.put("hibernate.archive.autodetection", "class");
-        props.put("hibernate.transaction.manager_lookup_class", "com.atomikos.icatch.jta.hibernate3.TransactionManagerLookup");
+        props.put("hibernate.transaction.manager_lookup_class", "org.springframework.orm.hibernate4.HibernateTransactionManager");
         props.put("hibernate.dialect", environment.getProperty("jpa.dialect"));
         props.put("hibernate.hbm2ddl.auto", environment.getProperty("jpa.hibernate.create.strategy"));
         lef.setJpaProperties(props);

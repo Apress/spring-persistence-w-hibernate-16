@@ -5,16 +5,7 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
 
-    <display-name>helix-console-web</display-name>
-
-    <context-param>
-        <param-name>log4jConfigLocation</param-name>
-        <param-value>file:${ext.properties.dir:${user.home}/.hc}/helix-console.log4j.properties</param-value>
-    </context-param>
-    <context-param>
-        <param-name>log4jExposeWebAppRoot</param-name>
-        <param-value>false</param-value>
-    </context-param>
+    <display-name>audioManager</display-name>
 
 
 

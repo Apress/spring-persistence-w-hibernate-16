@@ -18,6 +18,7 @@
     <java.version>1.8</java.version>
     <maven.compiler.plugin.version>3.1</maven.compiler.plugin.version>
     <maven.resource.plugin.version>2.6</maven.resource.plugin.version>
+    <jetty.version>9.2.10.v20150310</jetty.version>
 </properties>
 
     <build>
@@ -43,6 +44,11 @@
                 <configuration>
                     <encoding>UTF-8</encoding>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>${jetty.version}</version>
             </plugin>
         </plugins>
     </build>

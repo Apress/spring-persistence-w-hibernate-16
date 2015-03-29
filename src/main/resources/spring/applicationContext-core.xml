@@ -1,3 +1,4 @@
+<!--
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:aop="http://www.springframework.org/schema/aop"
@@ -8,18 +9,18 @@
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
-    <!--
+    &lt;!&ndash;
         This will automatically locate any and all property files you have
         within your classpath, provided they fall under the META-INF/spring
         directory. The located property files are parsed and their values can
         then be used within application context files in the form of
         ${propertyKey}.
-    -->
+    &ndash;&gt;
     <context:property-placeholder
             ignore-resource-not-found="true"
             location="classpath*:*.properties"/>
 
-    <!-- post-processors -->
+    &lt;!&ndash; post-processors &ndash;&gt;
     <context:annotation-config/>
 
     <context:spring-configured/>
@@ -42,7 +43,7 @@
     </bean>
 
 
-    <!--Use Hibernate SessionFactory instead? -->
+    &lt;!&ndash;Use Hibernate SessionFactory instead? &ndash;&gt;
     <bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
@@ -58,3 +59,4 @@
     </bean>
 
 </beans>
+-->
