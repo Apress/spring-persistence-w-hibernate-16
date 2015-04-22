@@ -9,7 +9,11 @@ import java.net.URL;
 @Entity
 @Inheritance(strategy= InheritanceType.JOINED)
 public class Thing {
-    @Id()
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
     private URL url;
     private URL additionalType;
     private String alternateName;
@@ -83,4 +87,5 @@ public class Thing {
     public void setUrl(URL url) {
         this.url = url;
     }
+
 }
