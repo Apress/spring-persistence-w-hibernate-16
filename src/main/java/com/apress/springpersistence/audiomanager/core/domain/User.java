@@ -5,6 +5,15 @@ import javax.persistence.*;
 @Entity
 public class User {
 
+    public User() {
+
+    }
+
+    public User(String username, String passwordHash) {
+        this.username = username;
+        this.passwordHash = passwordHash;
+    }
+
     @Id
     private String username;
 
