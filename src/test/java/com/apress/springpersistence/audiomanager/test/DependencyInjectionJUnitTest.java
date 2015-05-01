@@ -1,6 +1,10 @@
 package com.apress.springpersistence.audiomanager.test;
 
 import com.apress.springpersistence.audiomanager.core.domain.Person;
+import com.apress.springpersistence.audiomanager.core.domain.components.PersonName;
+import junit.framework.Assert;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +19,31 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @WebAppConfiguration
 @SpringApplicationConfiguration(classes = AudioManagerApplication.class)
 public class DependencyInjectionJUnitTest {
+    Person person;
 
     @Autowired
     PersonRepository personRepository;
 
+    @Before
+    public void setUp() {
+        PersonName personName = new PersonName();
+        personName.setFirstName("Test");
+        personName.setLastName("User");
+
+        person = new Person();
+        person.setFullName(personName);
+        personRepository.save(person);
+    }
+
+    @After
+    public void tearDown() {
+        personRepository.delete(person);
+        person = null;
+    }
+
     @Test
-    public void testPerson() {
-       Person person = new Person();
+    public void testPersonPersisted() {
+        Assert.assertEquals(1, this.personRepository.count());
     }
 
 }

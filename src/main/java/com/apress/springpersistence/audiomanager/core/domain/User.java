@@ -3,6 +3,7 @@ package com.apress.springpersistence.audiomanager.core.domain;
 import javax.persistence.*;
 
 @Entity
+@Table(name="UserAccount")
 public class User {
 
     public User() {

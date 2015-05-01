@@ -13,11 +13,11 @@ public interface UserRepository extends CrudRepository<User, String> {
 
     public User findByUsernameAndPasswordHash(@Param("username") String username, @Param("passwordHash") String passwordHash);
 
-    public Slice<User> findByPersonNameLastNameOrderByPersonNameLastNameAsc(@Param("lastName") String lastName, Pageable pageable);
+    public Slice<User> findByPersonPersonNameLastNameOrderByPersonPersonNameLastNameAsc(@Param("lastName") String lastName, Pageable pageable);
 
-    public Slice<User> findByPersonNameFirstNameOrderByPersonNameFirstNameAsc(@Param("firstName") String firstName, Pageable pageable);
+    public Slice<User> findByPersonPersonNameFirstNameOrderByPersonPersonNameFirstNameAsc(@Param("firstName") String firstName, Pageable pageable);
 
-    public Slice<User> findByPersonNameFirstNameAndPersonNameLastNameOrderByPersonNameLastNameAsc(@Param("firstName") String firstName,@Param("lastName") String lastName, Pageable pageable);
+    public Slice<User> findByPersonPersonNameFirstNameAndPersonPersonNameLastNameOrderByPersonPersonNameLastNameAsc(@Param("firstName") String firstName,@Param("lastName") String lastName, Pageable pageable);
 
 
 

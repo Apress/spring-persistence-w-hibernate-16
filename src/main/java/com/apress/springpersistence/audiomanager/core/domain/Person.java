@@ -10,34 +10,37 @@ import java.util.Optional;
  */
 @Entity
 @PrimaryKeyJoinColumn(name="THING_URL")
+@Inheritance(strategy=InheritanceType.JOINED)
 public class Person extends Thing {
 
 
     @Embedded
-    private PersonName name;
+    private PersonName personName;
 
 
     private String email;
     private String gender;
     private String telephone;
 
+    @Transient
     public Optional<String> getGivenName() {
-        return Optional.ofNullable(this.name.getFirstName());
+        return Optional.ofNullable(this.personName.getFirstName());
     }
 
+    @Transient
     public Optional<String> getAdditionalName() {
-        return Optional.ofNullable(this.name.getLastName());
+        return Optional.ofNullable(this.personName.getLastName());
     }
 
 
 
 
     public PersonName getFullName() {
-        return name;
+        return personName;
     }
 
     public void setFullName(PersonName name) {
-        this.name = name;
+        this.personName = name;
     }
 
     public String getEmail() {
