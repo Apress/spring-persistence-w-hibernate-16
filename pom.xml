@@ -22,6 +22,12 @@
         <jetty.version>9.2.10.v20150310</jetty.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <flyway.version>3.0</flyway.version>
+        <db.username>sa</db.username>
+        <db.password>test</db.password>
+        <db.host>localhost</db.host>
+        <db.db>audiomanager</db.db>
+        <db.port>5432</db.port>
     </properties>
 
     <dependencies>
@@ -36,6 +42,11 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+            <version>10.11.1.1</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -68,6 +79,35 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>${jetty.version}</version>
             </plugin>
+
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>${flyway.version}</version>
+                <configuration>
+                    <!--<url>jdbc:postgresql://${db.host}:${db.port}/${db.db}</url>-->
+                    <url>jdbc:derby:${db.db}</url>
+                    <driver>org.apache.derby.jdbc.EmbeddedDriver</driver>
+                    <user>${db.username}</user>
+                    <password>${db.password}</password>
+                    <schemas>
+                        <schema>public</schema>
+                    </schemas>
+                    <locations>
+                        <location>filesystem:${project.basedir}/src/main/sql/migration</location>
+                        <location>db/migration</location>
+                    </locations>
+                    <initVersion>1.0</initVersion>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.derby</groupId>
+                        <artifactId>derby</artifactId>
+                        <version>10.11.1.1</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
         </plugins>
     </build>
 

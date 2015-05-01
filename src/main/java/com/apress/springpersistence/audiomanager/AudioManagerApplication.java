@@ -1,5 +1,7 @@
 package com.apress.springpersistence.audiomanager;
 
+import com.apress.springpersistence.audiomanager.core.config.AudioManagerCoreConfig;
+import com.apress.springpersistence.audiomanager.web.config.WebConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.*;
@@ -17,7 +19,7 @@ import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguratio
 
 @Configuration
 @EnableJpaRepositories
-@Import(RepositoryRestMvcConfiguration.class)
+@Import({AudioManagerCoreConfig.class, WebConfiguration.class, RepositoryRestMvcConfiguration.class})
 @EnableAutoConfiguration
 public class AudioManagerApplication {
 

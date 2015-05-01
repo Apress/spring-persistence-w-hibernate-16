@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -24,8 +25,9 @@ import javax.transaction.SystemException;
 import java.util.Properties;
 
 @Configuration
-@Profile("jpa")
+//@Profile("jpa")
 @EnableJpaRepositories("com.apress.springpersistence.audiomanager.core")
+@EnableConfigurationProperties
 @EnableTransactionManagement
 @PropertySource("classpath:jpa.properties")
 public class JpaConfig {
@@ -55,7 +57,7 @@ public class JpaConfig {
         lef.setDataSource(dataSource());
         lef.setJpaVendorAdapter(jpaVendorAdapter());
         lef.setJpaDialect(new HibernateJpaDialect());
-        String[] packages = environment.getProperty("jpa.packages.to.scan").split(",");
+        String[] packages = environment.getProperty("jpa.entities.package").split(",");
         lef.setPackagesToScan(packages);
 
         Properties props = new Properties();
@@ -85,11 +87,11 @@ public class JpaConfig {
         return hibernateJpaVendorAdapter;
     }
 
-    @Bean
+   /* @Bean
     public JpaTransactionManager jpaTransactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager(entityManagerFactory());
         return transactionManager;
-    }
+    }*/
 
     //todo: add transaction managers
 

@@ -2,7 +2,9 @@ package com.apress.springpersistence.audiomanager.core.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.orm.jpa.JpaDialect;
+import org.springframework.stereotype.Component;
 
+@Component
 @ConfigurationProperties(prefix = DataSourceConfigurationPropertiesBean.PREFIX)
 public class DataSourceConfigurationPropertiesBean {
 
