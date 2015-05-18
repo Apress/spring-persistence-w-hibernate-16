@@ -1,6 +1,7 @@
 package com.apress.springpersistence.audiomanager.core.domain;
 
 import com.apress.springpersistence.audiomanager.core.domain.components.PersonName;
+import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import java.util.Optional;
@@ -17,7 +18,7 @@ public class Person extends Thing {
     @Embedded
     private PersonName personName;
 
-
+    @Email
     private String email;
     private String gender;
     private String telephone;

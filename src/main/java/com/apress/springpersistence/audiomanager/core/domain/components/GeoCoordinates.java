@@ -3,6 +3,7 @@ package com.apress.springpersistence.audiomanager.core.domain.components;
 import com.apress.springpersistence.audiomanager.core.domain.StructuredValue;
 import com.apress.springpersistence.audiomanager.core.domain.Thing;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 /**
@@ -11,7 +12,10 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class GeoCoordinates extends Thing implements StructuredValue {
     private Double elevation;
+    @Column(nullable = false)
     private Double latitude;
+
+    @Column(nullable = false)
     private Double longitude;
 
     public Double getElevation() {

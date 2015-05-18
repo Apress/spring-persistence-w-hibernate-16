@@ -17,11 +17,19 @@ public class Thing {
     private URL url;
     private URL additionalType;
     private String alternateName;
+    @Column(length = 255)
     private String description;
+
+    @org.hibernate.validator.constraints.URL
     private URL image;
+
+    @Column(length=255)
     private String name;
 //    private Action potentialAction;
     private URL sameAs;
+
+    @Version
+    private Integer version;
 
 
     public URL getAdditionalType() {
@@ -88,4 +96,19 @@ public class Thing {
         this.url = url;
     }
 
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }

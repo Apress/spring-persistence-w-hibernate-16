@@ -22,16 +22,16 @@ public class Place extends Thing {
     private Place containedIn;
     @ManyToOne
     private Event event;
-    private String faxNumber;
+
     @Embedded
     private GeoCoordinates geo;
     private String globalLocationNumber;
-    private URL hasMap;
-    private String interactionCount;
+
     private String isIcv4;
     private URL logo;
     @ManyToOne
     private Review review;
+
     private String telephone;
 
 
@@ -67,13 +67,6 @@ public class Place extends Thing {
         this.event = event;
     }
 
-    public String getFaxNumber() {
-        return faxNumber;
-    }
-
-    public void setFaxNumber(String faxNumber) {
-        this.faxNumber = faxNumber;
-    }
 
     public GeoCoordinates getGeo() {
         return geo;
@@ -91,21 +84,7 @@ public class Place extends Thing {
         this.globalLocationNumber = globalLocationNumber;
     }
 
-    public URL getHasMap() {
-        return hasMap;
-    }
 
-    public void setHasMap(URL hasMap) {
-        this.hasMap = hasMap;
-    }
-
-    public String getInteractionCount() {
-        return interactionCount;
-    }
-
-    public void setInteractionCount(String interactionCount) {
-        this.interactionCount = interactionCount;
-    }
 
     public String getIsIcv4() {
         return isIcv4;
