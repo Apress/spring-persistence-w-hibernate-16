@@ -19,6 +19,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.jta.JtaTransactionManager;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import javax.transaction.SystemException;
@@ -52,10 +53,10 @@ public class JpaConfig {
 
 
     @Bean
-    public EntityManagerFactory entityManagerFactory() {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean lef = new LocalContainerEntityManagerFactoryBean();
         lef.setDataSource(dataSource());
-        lef.setJpaVendorAdapter(jpaVendorAdapter());
+        lef.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         lef.setJpaDialect(new HibernateJpaDialect());
         String[] packages = environment.getProperty("jpa.entities.package").split(",");
         lef.setPackagesToScan(packages);
@@ -74,7 +75,7 @@ public class JpaConfig {
 
         lef.afterPropertiesSet();
 
-        return lef.getObject();
+        return lef;
     }
 
     @Bean
@@ -87,11 +88,12 @@ public class JpaConfig {
         return hibernateJpaVendorAdapter;
     }
 
-   /* @Bean
-    public JpaTransactionManager jpaTransactionManager() {
-        JpaTransactionManager transactionManager = new JpaTransactionManager(entityManagerFactory());
+   @Bean
+    public JpaTransactionManager jpaTransactionManager(EntityManagerFactory entityManagerFactory) {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+       transactionManager.setEntityManagerFactory(entityManagerFactory);
         return transactionManager;
-    }*/
+    }
 
     //todo: add transaction managers
 

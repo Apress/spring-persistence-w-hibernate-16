@@ -9,15 +9,15 @@ import org.springframework.web.context.support.StandardServletEnvironment;
 
 @Configuration
 @EnableAsync
-@PropertySource("classpath:application.properties")
+@PropertySources(value = {@PropertySource("classpath:application.properties")})
 @ComponentScan(basePackages = {"com.apress.springpersistence.audiomanager"}, excludeFilters = {
         @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = WebConfiguration.class)
 })
 public class AudioManagerCoreConfig {
     //this should automatically pick up JPAConfig (based on autoscan above)
-     @Bean
+   /*  @Bean
     public Environment environment() {
         Environment environment = new StandardServletEnvironment();
          return environment;
-     }
+     }*/
 }

@@ -1,6 +1,7 @@
 package com.apress.springpersistence.audiomanager.core.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 /**
@@ -11,10 +12,20 @@ import javax.persistence.PrimaryKeyJoinColumn;
 public class Comment extends CreativeWork {
 
 
+    @ManyToOne
+    private CreativeWork creativeWork;
 
     private Integer downvoteCount;
     private Integer upvoteCount;
 
+
+    public CreativeWork getCreativeWork() {
+        return creativeWork;
+    }
+
+    public void setCreativeWork(CreativeWork creativeWork) {
+        this.creativeWork = creativeWork;
+    }
 
     public Integer getDownvoteCount() {
         return downvoteCount;

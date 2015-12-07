@@ -1,16 +1,40 @@
 package com.apress.springpersistence.audiomanager.core.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+
+import org.springframework.cache.annotation.Caching;
+
+import javax.persistence.*;
 import java.net.URL;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by pfisher on 9/29/14.
  */
 @Entity
 @PrimaryKeyJoinColumn(name="THING_URL")
+@NamedEntityGraphs({
+        @NamedEntityGraph(
+                name = "creativeWorkWithComments",
+                attributeNodes = {
+                        @NamedAttributeNode("comments")
+                }
+        ),
+        @NamedEntityGraph(
+                name = "creativeWorkWithCommentsAndAudio",
+                attributeNodes = {
+                        @NamedAttributeNode(value = "comments", subgraph = "audioGraph")
+                },
+                subgraphs = {
+                        @NamedSubgraph(
+                                name = "audioGraph",
+                                attributeNodes = {
+                                        @NamedAttributeNode("audio")
+                                }
+                        )
+                }
+        )
+})
 public class CreativeWork extends Thing {
 
     @ManyToOne
@@ -33,8 +57,8 @@ public class CreativeWork extends Thing {
     private Person author;
     private String award;
     private String citiation;
-    @ManyToOne
-    private Comment comment;
+    @OneToMany
+    private List<Comment> comments;
     private Integer commentCount;
     @ManyToOne
     private Place contentLocation;
@@ -202,12 +226,12 @@ public class CreativeWork extends Thing {
         this.citiation = citiation;
     }
 
-    public Comment getComment() {
-        return comment;
+    public List<Comment> getComments() {
+        return comments;
     }
 
-    public void setComment(Comment comment) {
-        this.comment = comment;
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     public Integer getCommentCount() {

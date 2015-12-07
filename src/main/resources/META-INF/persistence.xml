@@ -6,8 +6,27 @@
                       transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <mapping-file>META-INF/orm.xml</mapping-file>
+        <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
+
         <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <!--
+                value='create' to build a new database on each run;
+                value='update' to modify an existing database;
+                value='create-drop' to create and drop tables on each run;
+                value='validate' makes no changes to the database
+             -->
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.cache.use_second_level_cache" value="true"/>
+            <property name="hibernate.cache.provider_class"
+                      value="net.sf.ehcache.hibernate.SingletonEhCacheProvider"/>
+            <property name="hibernate.ejb.naming_strategy"
+                      value="org.hibernate.cfg.ImprovedNamingStrategy"/>
+
         </properties>
+
+
     </persistence-unit>
 
 </persistence>
