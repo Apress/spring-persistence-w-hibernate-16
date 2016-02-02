@@ -68,7 +68,7 @@ public class JpaConfig {
         props.put("hibernate.connection.charSet", "UTF-8");
         props.put("hibernate.current_session_context_class", "jta");
         props.put("hibernate.archive.autodetection", "class");
-        props.put("hibernate.transaction.manager_lookup_class", "org.springframework.orm.hibernate4.HibernateTransactionManager");
+        props.put("hibernate.transaction.manager_lookup_class", "org.springframework.orm.hibernate5.HibernateTransactionManager");
         props.put("hibernate.dialect", environment.getProperty("jpa.dialect"));
         props.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
         lef.setJpaProperties(props);
@@ -89,7 +89,7 @@ public class JpaConfig {
     }
 
    @Bean
-    public JpaTransactionManager jpaTransactionManager(EntityManagerFactory entityManagerFactory) {
+    public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
        transactionManager.setEntityManagerFactory(entityManagerFactory);
         return transactionManager;
