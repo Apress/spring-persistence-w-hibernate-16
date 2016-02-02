@@ -1,5 +1,8 @@
 package com.apress.springpersistence.audiomanager.core.domain;
 
+import org.springframework.data.annotation.Version;
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 
@@ -7,23 +10,14 @@ import javax.persistence.PrimaryKeyJoinColumn;
  * Created by pfisher on 10/1/14.
  */
 @Entity
-@PrimaryKeyJoinColumn(name="THING_URL")
-public class Rating extends Thing implements Intangible {
+public class Rating extends AbstractPersistable<Long> implements Intangible {
 
-
-    private Integer bestRating;
     private String ratingValue;
-    private Integer worstRating;
+
+    @Version
+    private Integer version;
 
 
-
-    public Integer getBestRating() {
-        return bestRating;
-    }
-
-    public void setBestRating(Integer bestRating) {
-        this.bestRating = bestRating;
-    }
 
     public String getRatingValue() {
         return ratingValue;
@@ -33,11 +27,11 @@ public class Rating extends Thing implements Intangible {
         this.ratingValue = ratingValue;
     }
 
-    public Integer getWorstRating() {
-        return worstRating;
+    public Integer getVersion() {
+        return version;
     }
 
-    public void setWorstRating(Integer worstRating) {
-        this.worstRating = worstRating;
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }

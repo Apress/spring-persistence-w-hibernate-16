@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.net.URL;
 import java.util.List;
@@ -14,11 +15,12 @@ import java.util.List;
 /**
  * Created by pfisher on 7/14/15.
  */
+@Repository
 public interface CreativeWorkRepository extends PagingAndSortingRepository<Thing, URL> {
 
 /*    @EntityGraph("creativeWorkWithComments")
     List<CreativeWork> findByAuthor(Person author);*/
 
-    @EntityGraph("creativeWorkWithCommentsAndAudio")
+    @EntityGraph(value = "creativeWorkWithCommentsAndText",type = EntityGraph.EntityGraphType.LOAD, attributePaths = {"comments", "text"})
     List<CreativeWork> findByAuthor(Person author);
 }

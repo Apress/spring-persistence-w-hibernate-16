@@ -64,13 +64,13 @@ public class JpaConfig {
         Properties props = new Properties();
         props.put("hibernate.show_sql", "true");
         props.put("hibernate.format_sql", "true");
-        props.put("hibernate.ejb.naming_strategy", "org.hibernate.cfg.ImprovedNamingStrategy");
+        props.put("hibernate.ejb.naming_strategy", "org.springframework.boot.orm.jpa.hibernate.SpringNamingStrategy");
         props.put("hibernate.connection.charSet", "UTF-8");
         props.put("hibernate.current_session_context_class", "jta");
         props.put("hibernate.archive.autodetection", "class");
         props.put("hibernate.transaction.manager_lookup_class", "org.springframework.orm.hibernate4.HibernateTransactionManager");
         props.put("hibernate.dialect", environment.getProperty("jpa.dialect"));
-        props.put("hibernate.hbm2ddl.auto", environment.getProperty("jpa.hibernate.create.strategy"));
+        props.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
         lef.setJpaProperties(props);
 
         lef.afterPropertiesSet();

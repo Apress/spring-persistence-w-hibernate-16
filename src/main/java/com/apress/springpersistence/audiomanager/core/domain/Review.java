@@ -1,5 +1,7 @@
 package com.apress.springpersistence.audiomanager.core.domain;
 
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -9,7 +11,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
  */
 @Entity
 @PrimaryKeyJoinColumn(name="THING_URL")
-public class Review extends CreativeWork {
+public class Review extends AbstractPersistable<Long> {
 
     @ManyToOne
     private Thing itemReviewed;
@@ -17,7 +19,8 @@ public class Review extends CreativeWork {
     @ManyToOne
     private Rating reviewRating;
 
-
+    @ManyToOne
+    private Person reviewer;
 
 
     public Thing getItemReviewed() {
@@ -42,5 +45,13 @@ public class Review extends CreativeWork {
 
     public void setReviewRating(Rating reviewRating) {
         this.reviewRating = reviewRating;
+    }
+
+    public Person getReviewer() {
+        return reviewer;
+    }
+
+    public void setReviewer(Person reviewer) {
+        this.reviewer = reviewer;
     }
 }

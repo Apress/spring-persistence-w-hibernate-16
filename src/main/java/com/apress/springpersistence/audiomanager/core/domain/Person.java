@@ -20,7 +20,7 @@ public class Person extends Thing {
 
     @Email
     private String email;
-    private String gender;
+    private Gender gender;
     private String telephone;
 
     @Transient
@@ -32,9 +32,6 @@ public class Person extends Thing {
     public Optional<String> getAdditionalName() {
         return Optional.ofNullable(this.personName.getLastName());
     }
-
-
-
 
     public PersonName getFullName() {
         return personName;
@@ -52,11 +49,11 @@ public class Person extends Thing {
         this.email = email;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 

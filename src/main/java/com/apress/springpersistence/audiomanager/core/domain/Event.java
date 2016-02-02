@@ -14,24 +14,18 @@ public class Event extends Thing {
 
     @ManyToOne
     private Person attendee;
-    private Date doorTime;
     @ManyToOne
     private Duration duration;
+
+    private Date startDate;
     private Date endDate;
     private EventStatusType eventStatus;
     @ManyToOne
     private Place location;
     @ManyToOne
     private Person organizer;
-    @ManyToOne
-    private Person performer;
-    private Date previousStartDate;
-    private Date startDate;
-    @ManyToOne
-    private Event subEvent;
-    @ManyToOne
-    private Event superEvent;
-    private String typicalAgeRange;
+
+
     @ManyToOne
     private CreativeWork workPerformed;
 
@@ -41,14 +35,6 @@ public class Event extends Thing {
 
     public void setAttendee(Person attendee) {
         this.attendee = attendee;
-    }
-
-    public Date getDoorTime() {
-        return doorTime;
-    }
-
-    public void setDoorTime(Date doorTime) {
-        this.doorTime = doorTime;
     }
 
     public Duration getDuration() {
@@ -91,52 +77,12 @@ public class Event extends Thing {
         this.organizer = organizer;
     }
 
-    public Person getPerformer() {
-        return performer;
-    }
-
-    public void setPerformer(Person performer) {
-        this.performer = performer;
-    }
-
-    public Date getPreviousStartDate() {
-        return previousStartDate;
-    }
-
-    public void setPreviousStartDate(Date previousStartDate) {
-        this.previousStartDate = previousStartDate;
-    }
-
     public Date getStartDate() {
         return startDate;
     }
 
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
-    }
-
-    public Event getSubEvent() {
-        return subEvent;
-    }
-
-    public void setSubEvent(Event subEvent) {
-        this.subEvent = subEvent;
-    }
-
-    public Event getSuperEvent() {
-        return superEvent;
-    }
-
-    public void setSuperEvent(Event superEvent) {
-        this.superEvent = superEvent;
-    }
-
-    public String getTypicalAgeRange() {
-        return typicalAgeRange;
-    }
-
-    public void setTypicalAgeRange(String typicalAgeRange) {
-        this.typicalAgeRange = typicalAgeRange;
     }
 
     public CreativeWork getWorkPerformed() {

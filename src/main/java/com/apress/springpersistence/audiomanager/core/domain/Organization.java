@@ -5,54 +5,40 @@ import com.apress.springpersistence.audiomanager.core.domain.components.PostalAd
 import javax.persistence.*;
 import java.net.URL;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by pfisher on 10/1/14.
  */
 @Entity
-@PrimaryKeyJoinColumn(name="THING_URL")
+@PrimaryKeyJoinColumn(name = "THING_URL")
 public class Organization extends Thing {
-
 
     @Embedded
     private PostalAddress address;
-    @ManyToOne
-    private AggregateRating aggregateRating;
-    @ManyToOne
-    private Organization brand;
-    @ManyToOne
-    private Organization department;
-    private Date dissolutionDate;
-    private String duns;
+
     private String email;
-    @ManyToOne
-    private Person employee;
+    @ManyToMany
+    private Set<Person> employees = new HashSet<>();
     @ManyToOne
     private Event event;
     private String faxNumber;
     @ManyToOne
     private Person founder;
     private Date foundingDate;
-    private String globalLocationNumber;
-    @ManyToOne
-    private Place hasPOS;
-    private String interactionCount;
-    private String isIcv4;
+
     private String legalName;
     @ManyToOne
     private Place location;
     private URL logo;
-    @ManyToOne
-    private Person member;
-    @ManyToOne
-    private Organization memberOf;
+
     private String naics;
     @ManyToOne
     private Organization subOrganization;
     private String taxID;
     private String telephone;
     private String vatID;
-
 
 
     public PostalAddress getAddress() {
@@ -63,46 +49,6 @@ public class Organization extends Thing {
         this.address = address;
     }
 
-    public AggregateRating getAggregateRating() {
-        return aggregateRating;
-    }
-
-    public void setAggregateRating(AggregateRating aggregateRating) {
-        this.aggregateRating = aggregateRating;
-    }
-
-    public Organization getBrand() {
-        return brand;
-    }
-
-    public void setBrand(Organization brand) {
-        this.brand = brand;
-    }
-
-    public Organization getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Organization department) {
-        this.department = department;
-    }
-
-    public Date getDissolutionDate() {
-        return dissolutionDate;
-    }
-
-    public void setDissolutionDate(Date dissolutionDate) {
-        this.dissolutionDate = dissolutionDate;
-    }
-
-    public String getDuns() {
-        return duns;
-    }
-
-    public void setDuns(String duns) {
-        this.duns = duns;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -111,12 +57,12 @@ public class Organization extends Thing {
         this.email = email;
     }
 
-    public Person getEmployee() {
-        return employee;
+    public Set<Person> getEmployees() {
+        return employees;
     }
 
-    public void setEmployee(Person employee) {
-        this.employee = employee;
+    public void setEmployees(Set<Person> employees) {
+        this.employees = employees;
     }
 
     public Event getEvent() {
@@ -151,37 +97,6 @@ public class Organization extends Thing {
         this.foundingDate = foundingDate;
     }
 
-    public String getGlobalLocationNumber() {
-        return globalLocationNumber;
-    }
-
-    public void setGlobalLocationNumber(String globalLocationNumber) {
-        this.globalLocationNumber = globalLocationNumber;
-    }
-
-    public Place getHasPOS() {
-        return hasPOS;
-    }
-
-    public void setHasPOS(Place hasPOS) {
-        this.hasPOS = hasPOS;
-    }
-
-    public String getInteractionCount() {
-        return interactionCount;
-    }
-
-    public void setInteractionCount(String interactionCount) {
-        this.interactionCount = interactionCount;
-    }
-
-    public String getIsIcv4() {
-        return isIcv4;
-    }
-
-    public void setIsIcv4(String isIcv4) {
-        this.isIcv4 = isIcv4;
-    }
 
     public String getLegalName() {
         return legalName;
@@ -205,22 +120,6 @@ public class Organization extends Thing {
 
     public void setLogo(URL logo) {
         this.logo = logo;
-    }
-
-    public Person getMember() {
-        return member;
-    }
-
-    public void setMember(Person member) {
-        this.member = member;
-    }
-
-    public Organization getMemberOf() {
-        return memberOf;
-    }
-
-    public void setMemberOf(Organization memberOf) {
-        this.memberOf = memberOf;
     }
 
     public String getNaics() {

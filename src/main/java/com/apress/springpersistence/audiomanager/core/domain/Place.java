@@ -5,6 +5,8 @@ import com.apress.springpersistence.audiomanager.core.domain.components.PostalAd
 
 import javax.persistence.*;
 import java.net.URL;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by pfisher on 10/1/14.
@@ -13,24 +15,19 @@ import java.net.URL;
 @PrimaryKeyJoinColumn(name="THING_URL")
 public class Place extends Thing {
 
-
     @Embedded
     private PostalAddress address;
-    @ManyToOne
-    private AggregateRating aggregateRating;
+
     @ManyToOne
     private Place containedIn;
-    @ManyToOne
-    private Event event;
 
     @Embedded
     private GeoCoordinates geo;
     private String globalLocationNumber;
 
-    private String isIcv4;
     private URL logo;
-    @ManyToOne
-    private Review review;
+    @OneToMany
+    private Set<Review> reviews = new HashSet<Review>();
 
     private String telephone;
 
@@ -43,28 +40,12 @@ public class Place extends Thing {
         this.address = address;
     }
 
-    public AggregateRating getAggregateRating() {
-        return aggregateRating;
-    }
-
-    public void setAggregateRating(AggregateRating aggregateRating) {
-        this.aggregateRating = aggregateRating;
-    }
-
     public Place getContainedIn() {
         return containedIn;
     }
 
     public void setContainedIn(Place containedIn) {
         this.containedIn = containedIn;
-    }
-
-    public Event getEvent() {
-        return event;
-    }
-
-    public void setEvent(Event event) {
-        this.event = event;
     }
 
 
@@ -84,14 +65,16 @@ public class Place extends Thing {
         this.globalLocationNumber = globalLocationNumber;
     }
 
-
-
-    public String getIsIcv4() {
-        return isIcv4;
+    public Set<Review> getReviews() {
+        return reviews;
     }
 
-    public void setIsIcv4(String isIcv4) {
-        this.isIcv4 = isIcv4;
+    public void setReviews(Set<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public boolean addReview(Review review) {
+        return this.getReviews().add(review);
     }
 
     public URL getLogo() {
@@ -100,14 +83,6 @@ public class Place extends Thing {
 
     public void setLogo(URL logo) {
         this.logo = logo;
-    }
-
-    public Review getReview() {
-        return review;
-    }
-
-    public void setReview(Review review) {
-        this.review = review;
     }
 
     public String getTelephone() {

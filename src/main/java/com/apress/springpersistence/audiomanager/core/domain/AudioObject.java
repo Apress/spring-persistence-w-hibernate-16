@@ -12,8 +12,6 @@ public class AudioObject extends MediaObject {
 
     private String transcript;
 
-
-
     public String getTranscript() {
         return transcript;
     }

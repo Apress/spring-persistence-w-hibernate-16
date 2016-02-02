@@ -1,5 +1,7 @@
 package com.apress.springpersistence.audiomanager.core.domain;
 
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
 import javax.persistence.*;
 import java.net.URL;
 
@@ -8,24 +10,19 @@ import java.net.URL;
  */
 @Entity
 @Inheritance(strategy= InheritanceType.JOINED)
-public class Thing {
+public class Thing extends AbstractPersistable<Long> {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-
+    @org.hibernate.validator.constraints.URL
     private URL url;
     private URL additionalType;
     private String alternateName;
     @Column(length = 255)
     private String description;
 
-    @org.hibernate.validator.constraints.URL
-    private URL image;
-
     @Column(length=255)
     private String name;
 //    private Action potentialAction;
+    @org.hibernate.validator.constraints.URL
     private URL sameAs;
 
     @Version
@@ -54,14 +51,6 @@ public class Thing {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public URL getImage() {
-        return image;
-    }
-
-    public void setImage(URL image) {
-        this.image = image;
     }
 
     public String getName() {
@@ -104,11 +93,4 @@ public class Thing {
         this.version = version;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 }

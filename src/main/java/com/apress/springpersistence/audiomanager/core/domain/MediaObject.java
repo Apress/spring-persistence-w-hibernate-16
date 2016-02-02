@@ -12,46 +12,26 @@ import java.util.Date;
 public class MediaObject extends CreativeWork {
 
 //    private NewsArticle associatedArticle;
-    private String bitRate;
-    private String contentSize;
     private URL contentUrl;
     @ManyToOne
     private Duration duration;
     private URL embedUrl;
-    @ManyToOne
-    private CreativeWork encodesCreativeWork;
+
     private String encodingFormat;
-    private Date expires;
+    private Integer width;
     private Integer height;
-    private String interactionCount;
 //    private Offer offers;
-    private String playerType;
     @ManyToOne
     private Organization productionCompany;
     @ManyToOne
     private PublicationEvent publication;
-    @ManyToOne
-    private Place regionsAllowed;
+
     private Boolean requiresSubscription;
     private Date uploadDate;
-    private Integer width;
 
-
-    public String getBitRate() {
-        return bitRate;
-    }
-
-    public void setBitRate(String bitRate) {
-        this.bitRate = bitRate;
-    }
-
-    public String getContentSize() {
-        return contentSize;
-    }
-
-    public void setContentSize(String contentSize) {
-        this.contentSize = contentSize;
-    }
+    @Basic(fetch = FetchType.EAGER)
+    @Lob
+    private byte[] mediaContent;
 
     public URL getContentUrl() {
         return contentUrl;
@@ -77,13 +57,7 @@ public class MediaObject extends CreativeWork {
         this.embedUrl = embedUrl;
     }
 
-    public CreativeWork getEncodesCreativeWork() {
-        return encodesCreativeWork;
-    }
 
-    public void setEncodesCreativeWork(CreativeWork encodesCreativeWork) {
-        this.encodesCreativeWork = encodesCreativeWork;
-    }
 
     public String getEncodingFormat() {
         return encodingFormat;
@@ -93,36 +67,12 @@ public class MediaObject extends CreativeWork {
         this.encodingFormat = encodingFormat;
     }
 
-    public Date getExpires() {
-        return expires;
-    }
-
-    public void setExpires(Date expires) {
-        this.expires = expires;
-    }
-
     public Integer getHeight() {
         return height;
     }
 
     public void setHeight(Integer height) {
         this.height = height;
-    }
-
-    public String getInteractionCount() {
-        return interactionCount;
-    }
-
-    public void setInteractionCount(String interactionCount) {
-        this.interactionCount = interactionCount;
-    }
-
-    public String getPlayerType() {
-        return playerType;
-    }
-
-    public void setPlayerType(String playerType) {
-        this.playerType = playerType;
     }
 
     public Organization getProductionCompany() {
@@ -139,14 +89,6 @@ public class MediaObject extends CreativeWork {
 
     public void setPublication(PublicationEvent publication) {
         this.publication = publication;
-    }
-
-    public Place getRegionsAllowed() {
-        return regionsAllowed;
-    }
-
-    public void setRegionsAllowed(Place regionsAllowed) {
-        this.regionsAllowed = regionsAllowed;
     }
 
     public Boolean getRequiresSubscription() {

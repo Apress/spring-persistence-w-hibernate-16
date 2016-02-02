@@ -5,8 +5,7 @@ import org.springframework.cache.annotation.Caching;
 
 import javax.persistence.*;
 import java.net.URL;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by pfisher on 9/29/14.
@@ -19,163 +18,60 @@ import java.util.List;
                 attributeNodes = {
                         @NamedAttributeNode("comments")
                 }
-        ),
-        @NamedEntityGraph(
-                name = "creativeWorkWithCommentsAndAudio",
-                attributeNodes = {
-                        @NamedAttributeNode(value = "comments", subgraph = "audioGraph")
-                },
-                subgraphs = {
-                        @NamedSubgraph(
-                                name = "audioGraph",
-                                attributeNodes = {
-                                        @NamedAttributeNode("audio")
-                                }
-                        )
-                }
         )
 })
 public class CreativeWork extends Thing {
 
-    @ManyToOne
-    private Thing about;
-    private String accessibilityAPI;
-    private String accessibilityControl;
-    private String accessibilityFeature;
-    private String accessibilityHazard;
-    @ManyToOne
-    private Person accountablePerson;
-    @ManyToOne
-    private AggregateRating aggregateRating;
+//    TODO: add add/remove methods!
+
     private String alternativeHeadline;
-    @ManyToOne
-    private MediaObject associatedMedia;
-//    private Audience audience;
-    @ManyToOne
-    private AudioObject audio;
+
     @ManyToOne
     private Person author;
-    private String award;
-    private String citiation;
     @OneToMany
-    private List<Comment> comments;
-    private Integer commentCount;
-    @ManyToOne
-    private Place contentLocation;
-    private String contentRating;
-    @ManyToOne
-    private Person contributor;
-    @ManyToOne
-    private Person copyrightHolder;
-    private Integer copyrightYear;
-    @ManyToOne
-    private Person creator;
+    private Set<Comment> comments = new HashSet<Comment>();
+
     private Date dateCreated;
     private Date dateModified;
     private Date datePublished;
     private URL discussionUrl;
-    @ManyToOne
-    private Person editor;
 
-    private String educationalUse;
-    @ManyToOne
-    private MediaObject encoding;
-    @ManyToOne
-    private CreativeWork exampleOfWork;
     private String genre;
-    @ManyToOne
-    private CreativeWork hasPart;
+
     private String headline;
-    private String inLanguage;
-    private String interactionCount;
-    private String interactivityType;
-    private URL isBasedOnUrl;
+
     private Boolean isFamilyFriendly;
-    @ManyToOne
-    private CreativeWork isPartOf;
+
     private String keywords;
-    private String learningResourceType;
     private URL license;
-    @ManyToOne
-    private Thing mentions;
-//    private Offer offers;
-    private Integer position;
-    @ManyToOne
-    private Person provider;
+
     @ManyToOne
     private Organization publisher; //Organization
-    private URL publishingPrinciples;
-    @ManyToOne
-    private Review review;
-    @ManyToOne
-    private Organization sourceOrganization;
+    @OneToMany
+    private Set<Review> reviews = new HashSet<Review>();
+
+    @Column(length = 4000, nullable = true)
+    @Basic(fetch = FetchType.LAZY)
+    @Lob()
     private String text;
     private URL thumbnail;
     @ManyToOne
     private Duration timeRequired;
-    private String typicalAgeRange;
-    private Integer version;
-    private URL video;   // VideoObject
-    @ManyToOne
-    private CreativeWork workingExample;
 
-
-
-
-    public Thing getAbout() {
-        return about;
+    public Boolean getFamilyFriendly() {
+        return isFamilyFriendly;
     }
 
-    public void setAbout(Thing about) {
-        this.about = about;
+    public void setFamilyFriendly(Boolean familyFriendly) {
+        isFamilyFriendly = familyFriendly;
     }
 
-    public String getAccessibilityAPI() {
-        return accessibilityAPI;
+    public Organization getPublisher() {
+        return publisher;
     }
 
-    public void setAccessibilityAPI(String accessibilityAPI) {
-        this.accessibilityAPI = accessibilityAPI;
-    }
-
-    public String getAccessibilityControl() {
-        return accessibilityControl;
-    }
-
-    public void setAccessibilityControl(String accessibilityControl) {
-        this.accessibilityControl = accessibilityControl;
-    }
-
-    public String getAccessibilityFeature() {
-        return accessibilityFeature;
-    }
-
-    public void setAccessibilityFeature(String accessibilityFeature) {
-        this.accessibilityFeature = accessibilityFeature;
-    }
-
-    public String getAccessibilityHazard() {
-        return accessibilityHazard;
-    }
-
-    public void setAccessibilityHazard(String accessibilityHazard) {
-        this.accessibilityHazard = accessibilityHazard;
-    }
-
-    public Person getAccountablePerson() {
-        return accountablePerson;
-    }
-
-    public void setAccountablePerson(Person accountablePerson) {
-        this.accountablePerson = accountablePerson;
-    }
-
-    public AggregateRating getAggregateRating() {
-        return aggregateRating;
-    }
-
-    public void setAggregateRating(AggregateRating aggregateRating) {
-        this.aggregateRating = aggregateRating;
+    public void setPublisher(Organization publisher) {
+        this.publisher = publisher;
     }
 
     public String getAlternativeHeadline() {
@@ -186,22 +82,6 @@ public class CreativeWork extends Thing {
         this.alternativeHeadline = alternativeHeadline;
     }
 
-    public MediaObject getAssociatedMedia() {
-        return associatedMedia;
-    }
-
-    public void setAssociatedMedia(MediaObject associatedMedia) {
-        this.associatedMedia = associatedMedia;
-    }
-
-    public AudioObject getAudio() {
-        return audio;
-    }
-
-    public void setAudio(AudioObject audio) {
-        this.audio = audio;
-    }
-
     public Person getAuthor() {
         return author;
     }
@@ -210,84 +90,16 @@ public class CreativeWork extends Thing {
         this.author = author;
     }
 
-    public String getAward() {
-        return award;
-    }
-
-    public void setAward(String award) {
-        this.award = award;
-    }
-
-    public String getCitiation() {
-        return citiation;
-    }
-
-    public void setCitiation(String citiation) {
-        this.citiation = citiation;
-    }
-
-    public List<Comment> getComments() {
+    public Set<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(List<Comment> comments) {
+    public void setComments(SortedSet<Comment> comments) {
         this.comments = comments;
     }
 
     public Integer getCommentCount() {
-        return commentCount;
-    }
-
-    public void setCommentCount(Integer commentCount) {
-        this.commentCount = commentCount;
-    }
-
-    public Place getContentLocation() {
-        return contentLocation;
-    }
-
-    public void setContentLocation(Place contentLocation) {
-        this.contentLocation = contentLocation;
-    }
-
-    public String getContentRating() {
-        return contentRating;
-    }
-
-    public void setContentRating(String contentRating) {
-        this.contentRating = contentRating;
-    }
-
-    public Person getContributor() {
-        return contributor;
-    }
-
-    public void setContributor(Person contributor) {
-        this.contributor = contributor;
-    }
-
-    public Person getCopyrightHolder() {
-        return copyrightHolder;
-    }
-
-    public void setCopyrightHolder(Person copyrightHolder) {
-        this.copyrightHolder = copyrightHolder;
-    }
-
-    public Integer getCopyrightYear() {
-        return copyrightYear;
-    }
-
-    public void setCopyrightYear(Integer copyrightYear) {
-        this.copyrightYear = copyrightYear;
-    }
-
-    public Person getCreator() {
-        return creator;
-    }
-
-    public void setCreator(Person creator) {
-        this.creator = creator;
+        return this.comments.size();
     }
 
     public Date getDateCreated() {
@@ -322,37 +134,6 @@ public class CreativeWork extends Thing {
         this.discussionUrl = discussionUrl;
     }
 
-    public Person getEditor() {
-        return editor;
-    }
-
-    public void setEditor(Person editor) {
-        this.editor = editor;
-    }
-
-    public String getEducationalUse() {
-        return educationalUse;
-    }
-
-    public void setEducationalUse(String educationalUse) {
-        this.educationalUse = educationalUse;
-    }
-
-    public MediaObject getEncoding() {
-        return encoding;
-    }
-
-    public void setEncoding(MediaObject encoding) {
-        this.encoding = encoding;
-    }
-
-    public CreativeWork getExampleOfWork() {
-        return exampleOfWork;
-    }
-
-    public void setExampleOfWork(CreativeWork exampleOfWork) {
-        this.exampleOfWork = exampleOfWork;
-    }
 
     public String getGenre() {
         return genre;
@@ -362,13 +143,6 @@ public class CreativeWork extends Thing {
         this.genre = genre;
     }
 
-    public CreativeWork getHasPart() {
-        return hasPart;
-    }
-
-    public void setHasPart(CreativeWork hasPart) {
-        this.hasPart = hasPart;
-    }
 
     public String getHeadline() {
         return headline;
@@ -378,53 +152,6 @@ public class CreativeWork extends Thing {
         this.headline = headline;
     }
 
-    public String getInLanguage() {
-        return inLanguage;
-    }
-
-    public void setInLanguage(String inLanguage) {
-        this.inLanguage = inLanguage;
-    }
-
-    public String getInteractionCount() {
-        return interactionCount;
-    }
-
-    public void setInteractionCount(String interactionCount) {
-        this.interactionCount = interactionCount;
-    }
-
-    public String getInteractivityType() {
-        return interactivityType;
-    }
-
-    public void setInteractivityType(String interactivityType) {
-        this.interactivityType = interactivityType;
-    }
-
-    public URL getIsBasedOnUrl() {
-        return isBasedOnUrl;
-    }
-
-    public void setIsBasedOnUrl(URL isBasedOnUrl) {
-        this.isBasedOnUrl = isBasedOnUrl;
-    }
-
-    public Boolean getIsFamilyFriendly() {
-        return isFamilyFriendly;
-    }
-
-    public void setIsFamilyFriendly(Boolean isFamilyFriendly) {
-        this.isFamilyFriendly = isFamilyFriendly;
-    }
-
-    public CreativeWork getIsPartOf() {
-        return isPartOf;
-    }
-
-    public void setIsPartOf(CreativeWork isPartOf) {
-        this.isPartOf = isPartOf;
-    }
 
     public String getKeywords() {
         return keywords;
@@ -432,14 +159,6 @@ public class CreativeWork extends Thing {
 
     public void setKeywords(String keywords) {
         this.keywords = keywords;
-    }
-
-    public String getLearningResourceType() {
-        return learningResourceType;
-    }
-
-    public void setLearningResourceType(String learningResourceType) {
-        this.learningResourceType = learningResourceType;
     }
 
     public URL getLicense() {
@@ -450,60 +169,24 @@ public class CreativeWork extends Thing {
         this.license = license;
     }
 
-    public Thing getMentions() {
-        return mentions;
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 
-    public void setMentions(Thing mentions) {
-        this.mentions = mentions;
+    public boolean addComment(Comment comment) {
+        return this.getComments().add(comment);
     }
 
-    public Integer getPosition() {
-        return position;
+    public Set<Review> getReviews() {
+        return reviews;
     }
 
-    public void setPosition(Integer position) {
-        this.position = position;
+    public void setReviews(Set<Review> reviews) {
+        this.reviews = reviews;
     }
 
-    public Person getProvider() {
-        return provider;
-    }
-
-    public void setProvider(Person provider) {
-        this.provider = provider;
-    }
-
-    public Organization getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(Organization publisher) {
-        this.publisher = publisher;
-    }
-
-    public URL getPublishingPrinciples() {
-        return publishingPrinciples;
-    }
-
-    public void setPublishingPrinciples(URL publishingPrinciples) {
-        this.publishingPrinciples = publishingPrinciples;
-    }
-
-    public Review getReview() {
-        return review;
-    }
-
-    public void setReview(Review review) {
-        this.review = review;
-    }
-
-    public Organization getSourceOrganization() {
-        return sourceOrganization;
-    }
-
-    public void setSourceOrganization(Organization sourceOrganization) {
-        this.sourceOrganization = sourceOrganization;
+    public boolean addReview(Review review) {
+        return this.getReviews().add(review);
     }
 
     public String getText() {
@@ -530,35 +213,4 @@ public class CreativeWork extends Thing {
         this.timeRequired = timeRequired;
     }
 
-    public String getTypicalAgeRange() {
-        return typicalAgeRange;
-    }
-
-    public void setTypicalAgeRange(String typicalAgeRange) {
-        this.typicalAgeRange = typicalAgeRange;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
-
-    public URL getVideo() {
-        return video;
-    }
-
-    public void setVideo(URL video) {
-        this.video = video;
-    }
-
-    public CreativeWork getWorkingExample() {
-        return workingExample;
-    }
-
-    public void setWorkingExample(CreativeWork workingExample) {
-        this.workingExample = workingExample;
-    }
 }

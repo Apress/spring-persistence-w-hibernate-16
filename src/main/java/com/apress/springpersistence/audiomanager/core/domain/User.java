@@ -1,10 +1,12 @@
 package com.apress.springpersistence.audiomanager.core.domain;
 
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="UserAccount")
-public class User {
+public class User extends AbstractPersistable<Long>{
 
     public User() {
 
@@ -15,7 +17,7 @@ public class User {
         this.passwordHash = passwordHash;
     }
 
-    @Id
+    @Column(unique = true, length = 50)
     private String username;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -23,6 +25,26 @@ public class User {
     private Person person;
 
     private String passwordHash;
+
+    @Version
+    private Integer version;
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+    public Person getPerson() {
+
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
 
     public String getPasswordHash() {
         return passwordHash;

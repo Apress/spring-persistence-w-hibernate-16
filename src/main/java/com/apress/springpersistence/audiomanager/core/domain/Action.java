@@ -2,6 +2,7 @@ package com.apress.springpersistence.audiomanager.core.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Version;
 import java.util.Date;
 
 /**
@@ -14,7 +15,7 @@ public class Action extends Thing {
     private ActionStatusType actionStatus;
     @ManyToOne
     private Person agent;
-    private Date endTime;
+
     @ManyToOne
     private Thing instrument;
     @ManyToOne
@@ -26,9 +27,9 @@ public class Action extends Thing {
     @ManyToOne
     private Thing result;
     private Date startTime;
+    private Date endTime;
     @ManyToOne
     private EntryPoint target;
-
 
     public ActionStatusType getActionStatus() {
         return actionStatus;
