@@ -8,6 +8,7 @@ import com.apress.springpersistence.audiomanager.core.domain.Gender;
 import com.apress.springpersistence.audiomanager.core.domain.Person;
 import com.apress.springpersistence.audiomanager.core.domain.components.PersonName;
 import com.apress.springpersistence.audiomanager.core.repository.AudioObjectRepository;
+import com.apress.springpersistence.audiomanager.core.repository.PersonRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class AudioRepositoryTest {
     @Autowired
     private AudioObjectRepository audioObjectRepository;
 
+    @Autowired
+    private PersonRepository personRepository;
+
     @Test
     public void testSaveAudioContent() {
         AudioObject audioObject = new AudioObject();
@@ -41,6 +45,8 @@ public class AudioRepositoryTest {
         person.setFullName(name);
         person.setGender(Gender.Male);
         person.setTelephone("212-555-1212");
+
+        personRepository.save(person);
 
         audioObject.setAuthor(person);
         Comment comment = new Comment();

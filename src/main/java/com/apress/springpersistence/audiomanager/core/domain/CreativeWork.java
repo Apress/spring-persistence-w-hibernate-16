@@ -54,6 +54,8 @@ public class CreativeWork extends Thing {
     @Basic(fetch = FetchType.LAZY)
     @Lob()
     private String text;
+
+    @org.hibernate.validator.constraints.URL
     private URL thumbnail;
     @ManyToOne
     private Duration timeRequired;
