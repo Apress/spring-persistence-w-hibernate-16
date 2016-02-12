@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = DataSourceConfigurationPropertiesBean.PREFIX)
 public class DataSourceConfigurationPropertiesBean {
 
-    public static final String PREFIX = "datasource";
+    public static final String PREFIX = "spring.datasource";
 
     private String username;
     private String url;

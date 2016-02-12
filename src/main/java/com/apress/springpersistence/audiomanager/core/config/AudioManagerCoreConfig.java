@@ -9,7 +9,6 @@ import org.springframework.web.context.support.StandardServletEnvironment;
 
 @Configuration
 @EnableAsync
-@PropertySources(value = {@PropertySource("classpath:application.properties")})
 @ComponentScan(basePackages = {"com.apress.springpersistence.audiomanager"}, excludeFilters = {
         @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = WebConfiguration.class)
 })

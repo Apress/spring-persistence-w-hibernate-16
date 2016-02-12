@@ -174,6 +174,7 @@ public class CreativeWork extends Thing {
     }
 
     public boolean addComment(Comment comment) {
+        comment.setCreativeWork(this);
         return this.getComments().add(comment);
     }
 
