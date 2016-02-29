@@ -8,9 +8,7 @@ import javax.persistence.*;
  * Created by pfisher on 10/1/14.
  */
 @Entity
-@PrimaryKeyJoinColumn(name="THING_URL")
 public class Comment extends AbstractPersistable<Long> {
-
 
     @ManyToOne
     private CreativeWork creativeWork;
@@ -18,8 +16,6 @@ public class Comment extends AbstractPersistable<Long> {
     @Basic
     private String content;
 
-    private Integer downvoteCount;
-    private Integer upvoteCount;
 
     @Version
     private Integer version;
@@ -46,22 +42,6 @@ public class Comment extends AbstractPersistable<Long> {
 
     public void setCreativeWork(CreativeWork creativeWork) {
         this.creativeWork = creativeWork;
-    }
-
-    public Integer getDownvoteCount() {
-        return downvoteCount;
-    }
-
-    public void setDownvoteCount(Integer downvoteCount) {
-        this.downvoteCount = downvoteCount;
-    }
-
-    public Integer getUpvoteCount() {
-        return upvoteCount;
-    }
-
-    public void setUpvoteCount(Integer upvoteCount) {
-        this.upvoteCount = upvoteCount;
     }
 
 

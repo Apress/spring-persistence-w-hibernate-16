@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<persistence xmlns="http://java.sun.com/xml/ns/persistence"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0"
-             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-    <persistence-unit name="persistenceUnit"
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.1"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_1.xsd">
+    <persistence-unit name="audioManager"
                       transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <mapping-file>META-INF/orm.xml</mapping-file>
-        <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
+        <class>com.apress.springpersistence.audiomanager.core.domain.Action</class>
 
+        <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <!--
@@ -21,8 +22,8 @@
             <property name="hibernate.cache.use_second_level_cache" value="true"/>
             <property name="hibernate.cache.provider_class"
                       value="net.sf.ehcache.hibernate.SingletonEhCacheProvider"/>
-            <property name="hibernate.ejb.naming_strategy"
-                      value="org.hibernate.cfg.ImprovedNamingStrategy"/>
+            <property name="hibernate.implicit_naming_strategy"
+                      value="org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl"/>
 
         </properties>
 

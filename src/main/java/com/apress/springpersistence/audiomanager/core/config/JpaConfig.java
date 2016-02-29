@@ -12,10 +12,9 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.orm.jpa.JpaDialect;
-import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.JpaVendorAdapter;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.orm.jpa.*;
 import org.springframework.orm.jpa.vendor.HibernateJpaDialect;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -45,8 +44,12 @@ public class JpaConfig {
     @Autowired
     private JpaConfigurationPropertiesBean jpaConfigurationProperties;
 
+    /**
+     * This datasource will only be active when the EmbeddedDb profile is NOT active
+     * @return
+     */
+    @Profile("!"+ Profiles.EmbeddedDb)
     @Bean
-//    @ConfigurationProperties(prefix = DataSourceConfigurationPropertiesBean.PREFIX)
     public DataSource dataSource() {
         DataSourceBuilder factory = DataSourceBuilder
                 .create(this.getClass().getClassLoader())
@@ -57,14 +60,21 @@ public class JpaConfig {
         return factory.build();
     }
 
+    @Profile(Profiles.EmbeddedDb)
+    @Bean
+    public DataSource embeddedDataSource() {
+        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+        return builder.setType(EmbeddedDatabaseType.DERBY).build();
+    }
+
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+    public LocalContainerEntityManagerFactoryBean entityContainerManagerFactory() {
         LocalContainerEntityManagerFactoryBean lef = new LocalContainerEntityManagerFactoryBean();
         lef.setDataSource(dataSource());
         lef.setJpaVendorAdapter(jpaVendorAdapter());
         lef.setJpaDialect(jpaDialect());
-
+        lef.setMappingResources();
         Properties props = new Properties();
         props.put("hibernate.show_sql", jpaConfigurationProperties.isShowSql());
         props.put("hibernate.format_sql", jpaConfigurationProperties.isFormalSql());
@@ -80,6 +90,16 @@ public class JpaConfig {
 
         lef.afterPropertiesSet();
 
+        return lef;
+    }
+
+
+    @Bean
+    public LocalEntityManagerFactoryBean entityManagerFactory() {
+        LocalEntityManagerFactoryBean lef = new LocalEntityManagerFactoryBean();
+        lef.setPersistenceUnitName("audioManager");
+        lef.setJpaVendorAdapter(jpaVendorAdapter());
+        lef.setJpaDialect(jpaDialect());
         return lef;
     }
 

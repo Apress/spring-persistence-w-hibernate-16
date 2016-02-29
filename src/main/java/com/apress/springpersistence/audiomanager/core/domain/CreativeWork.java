@@ -31,8 +31,13 @@ public class CreativeWork extends Thing {
     @OneToMany
     private Set<Comment> comments = new HashSet<Comment>();
 
-    private Date dateCreated;
-    private Date dateModified;
+    public boolean addComment(Comment comment) {
+        comment.setCreativeWork(this);
+        return this.getComments().add(comment);
+    }
+
+    private Date dateCreated = new Date();
+    private Date dateModified = new Date();
     private Date datePublished;
     private URL discussionUrl;
 
@@ -173,11 +178,6 @@ public class CreativeWork extends Thing {
 
     public void setComments(Set<Comment> comments) {
         this.comments = comments;
-    }
-
-    public boolean addComment(Comment comment) {
-        comment.setCreativeWork(this);
-        return this.getComments().add(comment);
     }
 
     public Set<Review> getReviews() {

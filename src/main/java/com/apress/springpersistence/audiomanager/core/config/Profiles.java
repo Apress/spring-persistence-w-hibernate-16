@@ -14,4 +14,6 @@ public class Profiles {
 
     public static final String Test = "test";
 
+    public static final String EmbeddedDb = "embeddeddb";
+
 }
