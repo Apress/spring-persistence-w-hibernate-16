@@ -33,6 +33,16 @@ public class MediaObject extends CreativeWork {
     @Lob
     private byte[] mediaContent;
 
+    private String transcript;
+
+    public String getTranscript() {
+        return transcript;
+    }
+
+    public void setTranscript(String transcript) {
+        this.transcript = transcript;
+    }
+
     public URL getContentUrl() {
         return contentUrl;
     }

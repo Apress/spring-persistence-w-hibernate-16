@@ -1,5 +1,6 @@
 package com.apress.springpersistence.audiomanager.core.domain;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ public class User extends AbstractPersistable<Long>{
         this.passwordHash = passwordHash;
     }
 
+    @Length(min = 5, max=18)
     @Column(unique = true, length = 50)
     private String username;
 

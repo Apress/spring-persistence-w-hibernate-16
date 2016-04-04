@@ -11,7 +11,7 @@ import java.util.*;
  * Created by pfisher on 9/29/14.
  */
 @Entity
-@PrimaryKeyJoinColumn(name="THING_URL")
+@Inheritance(strategy= InheritanceType.JOINED)
 @NamedEntityGraphs({
         @NamedEntityGraph(
                 name = "creativeWorkWithComments",
@@ -22,13 +22,12 @@ import java.util.*;
 })
 public class CreativeWork extends Thing {
 
-//    TODO: add add/remove methods!
-
+    private String headline;
     private String alternativeHeadline;
 
     @ManyToOne
     private Person author;
-    @OneToMany
+    @OneToMany(orphanRemoval = true, cascade = {CascadeType.ALL})
     private Set<Comment> comments = new HashSet<Comment>();
 
     public boolean addComment(Comment comment) {
@@ -36,14 +35,26 @@ public class CreativeWork extends Thing {
         return this.getComments().add(comment);
     }
 
-    private Date dateCreated = new Date();
-    private Date dateModified = new Date();
+    @ManyToMany(mappedBy = "creativeWorks")
+    private Set<Category> categories = new HashSet<Category>();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn()
+    private MediaData mediaData;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn()
+    private MediaDataLow mediaDataLow;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn()
+    private MediaDataHigh mediaDataHigh;
+
+    @Temporal(TemporalType.DATE)
     private Date datePublished;
+
     private URL discussionUrl;
 
     private String genre;
 
-    private String headline;
 
     private Boolean isFamilyFriendly;
 
@@ -60,7 +71,6 @@ public class CreativeWork extends Thing {
     @Lob()
     private String text;
 
-    @org.hibernate.validator.constraints.URL
     private URL thumbnail;
     @ManyToOne
     private Duration timeRequired;
@@ -107,22 +117,6 @@ public class CreativeWork extends Thing {
 
     public Integer getCommentCount() {
         return this.comments.size();
-    }
-
-    public Date getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
-    public Date getDateModified() {
-        return dateModified;
-    }
-
-    public void setDateModified(Date dateModified) {
-        this.dateModified = dateModified;
     }
 
     public Date getDatePublished() {
@@ -216,4 +210,36 @@ public class CreativeWork extends Thing {
         this.timeRequired = timeRequired;
     }
 
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
+    }
+
+    public MediaData getMediaData() {
+        return mediaData;
+    }
+
+    public void setMediaData(MediaData mediaData) {
+        this.mediaData = mediaData;
+    }
+
+    public MediaDataLow getMediaDataLow() {
+        return mediaDataLow;
+    }
+
+    public void setMediaDataLow(MediaDataLow mediaDataLow) {
+        this.mediaDataLow = mediaDataLow;
+    }
+
+    public MediaDataHigh getMediaDataHigh() {
+        return mediaDataHigh;
+    }
+
+    public void setMediaDataHigh(MediaDataHigh mediaDataHigh) {
+        this.mediaDataHigh = mediaDataHigh;
+    }
 }

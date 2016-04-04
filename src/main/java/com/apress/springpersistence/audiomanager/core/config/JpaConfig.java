@@ -50,7 +50,7 @@ public class JpaConfig {
      */
     @Profile("!"+ Profiles.EmbeddedDb)
     @Bean
-    public DataSource dataSource() {
+    public DataSource localDataSource() {
         DataSourceBuilder factory = DataSourceBuilder
                 .create(this.getClass().getClassLoader())
                 .driverClassName(this.dataSourceProperties.getDriverClassName())
@@ -62,16 +62,16 @@ public class JpaConfig {
 
     @Profile(Profiles.EmbeddedDb)
     @Bean
-    public DataSource embeddedDataSource() {
+    public DataSource dataSource() {
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
         return builder.setType(EmbeddedDatabaseType.DERBY).build();
     }
 
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityContainerManagerFactory() {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean lef = new LocalContainerEntityManagerFactoryBean();
-        lef.setDataSource(dataSource());
+        lef.setDataSource(localDataSource());
         lef.setJpaVendorAdapter(jpaVendorAdapter());
         lef.setJpaDialect(jpaDialect());
         lef.setMappingResources();
@@ -93,15 +93,18 @@ public class JpaConfig {
         return lef;
     }
 
-
-    @Bean
+    /**
+     * This is for use with the persistece.xml persistence unit
+     * @return
+     */
+/*    @Bean
     public LocalEntityManagerFactoryBean entityManagerFactory() {
         LocalEntityManagerFactoryBean lef = new LocalEntityManagerFactoryBean();
         lef.setPersistenceUnitName("audioManager");
         lef.setJpaVendorAdapter(jpaVendorAdapter());
         lef.setJpaDialect(jpaDialect());
         return lef;
-    }
+    }*/
 
     @Bean
     public JpaVendorAdapter jpaVendorAdapter() {
@@ -121,9 +124,10 @@ public class JpaConfig {
 
 
    @Bean
-    public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+    public JpaTransactionManager transactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
-       transactionManager.setEntityManagerFactory(entityManagerFactory);
+
+       transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
         return transactionManager;
     }
 

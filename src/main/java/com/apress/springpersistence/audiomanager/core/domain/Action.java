@@ -16,16 +16,13 @@ public class Action extends Thing {
     @ManyToOne
     private Person agent;
 
-    @ManyToOne
-    private Thing instrument;
+
     @ManyToOne
     private Place location;
-    @ManyToOne
-    private Thing object;
+
     @ManyToOne
     private Person participant;
-    @ManyToOne
-    private Thing result;
+
     private Date startTime;
     private Date endTime;
     @ManyToOne
@@ -55,13 +52,7 @@ public class Action extends Thing {
         this.endTime = endTime;
     }
 
-    public Thing getInstrument() {
-        return instrument;
-    }
 
-    public void setInstrument(Thing instrument) {
-        this.instrument = instrument;
-    }
 
     public Place getLocation() {
         return location;
@@ -71,13 +62,6 @@ public class Action extends Thing {
         this.location = location;
     }
 
-    public Thing getObject() {
-        return object;
-    }
-
-    public void setObject(Thing object) {
-        this.object = object;
-    }
 
     public Person getParticipant() {
         return participant;
@@ -87,13 +71,7 @@ public class Action extends Thing {
         this.participant = participant;
     }
 
-    public Thing getResult() {
-        return result;
-    }
 
-    public void setResult(Thing result) {
-        this.result = result;
-    }
 
     public Date getStartTime() {
         return startTime;

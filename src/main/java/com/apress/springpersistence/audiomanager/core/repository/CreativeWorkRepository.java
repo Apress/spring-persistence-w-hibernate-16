@@ -18,9 +18,6 @@ import java.util.List;
 @Repository
 public interface CreativeWorkRepository extends PagingAndSortingRepository<Thing, URL> {
 
-/*    @EntityGraph("creativeWorkWithComments")
-    List<CreativeWork> findByAuthor(Person author);*/
-
     @EntityGraph(value = "creativeWorkWithCommentsAndText",type = EntityGraph.EntityGraphType.LOAD, attributePaths = {"comments", "text"})
     List<CreativeWork> findByAuthor(Person author);
 }

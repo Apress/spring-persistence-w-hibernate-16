@@ -1,4 +1,4 @@
-package com.apress.springpersistence.audiomanager.core.service;
+package com.apress.springpersistence.audiomanager.core.service.impl;
 
 import com.apress.springpersistence.audiomanager.core.repository.UserRepository;
 import com.apress.springpersistence.audiomanager.core.domain.User;

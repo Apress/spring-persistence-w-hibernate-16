@@ -2,14 +2,18 @@ package com.apress.springpersistence.audiomanager.core.domain.components;
 
 import com.apress.springpersistence.audiomanager.core.domain.Intangible;
 import com.apress.springpersistence.audiomanager.core.domain.Thing;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.Embeddable;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * Created by pfisher on 10/1/14.
  */
 @Embeddable
-public class PostalAddress extends Thing implements Intangible {
+public class PostalAddress implements Intangible {
+
     private String addressCountry;
     private String addressLocality;
     private String addressRegion;
@@ -64,4 +68,6 @@ public class PostalAddress extends Thing implements Intangible {
     public void setStreetAddress(String streetAddress) {
         this.streetAddress = streetAddress;
     }
+
+
 }

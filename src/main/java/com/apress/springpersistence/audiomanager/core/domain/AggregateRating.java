@@ -12,13 +12,13 @@ import javax.persistence.PrimaryKeyJoinColumn;
 public class AggregateRating extends Rating {
 
     @ManyToOne
-    private Thing itemReviewed;
+    private CreativeWork itemReviewed;
 
-    public Thing getItemReviewed() {
+    public CreativeWork getItemReviewed() {
         return itemReviewed;
     }
 
-    public void setItemReviewed(Thing itemReviewed) {
+    public void setItemReviewed(CreativeWork itemReviewed) {
         this.itemReviewed = itemReviewed;
     }
 

@@ -14,7 +14,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 public class Review extends AbstractPersistable<Long> {
 
     @ManyToOne
-    private Thing itemReviewed;
+    private CreativeWork itemReviewed;
     private String reviewBody;
     @ManyToOne
     private Rating reviewRating;
@@ -23,11 +23,11 @@ public class Review extends AbstractPersistable<Long> {
     private Person reviewer;
 
 
-    public Thing getItemReviewed() {
+    public CreativeWork getItemReviewed() {
         return itemReviewed;
     }
 
-    public void setItemReviewed(Thing itemReviewed) {
+    public void setItemReviewed(CreativeWork itemReviewed) {
         this.itemReviewed = itemReviewed;
     }
 

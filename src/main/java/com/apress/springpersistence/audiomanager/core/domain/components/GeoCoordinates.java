@@ -2,15 +2,21 @@ package com.apress.springpersistence.audiomanager.core.domain.components;
 
 import com.apress.springpersistence.audiomanager.core.domain.StructuredValue;
 import com.apress.springpersistence.audiomanager.core.domain.Thing;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * Created by pfisher on 10/1/14.
  */
 @Embeddable
-public class GeoCoordinates extends Thing implements StructuredValue {
+public class GeoCoordinates implements StructuredValue {
+
+
+
     private Double elevation;
     @Column(nullable = false)
     private Double latitude;

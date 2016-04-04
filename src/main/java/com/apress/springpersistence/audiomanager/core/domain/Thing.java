@@ -4,15 +4,15 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
 import java.net.URL;
+import java.util.Date;
 
 /**
  * Created by pfisher on 9/29/14.
  */
-@Entity
-@Inheritance(strategy= InheritanceType.JOINED)
+@MappedSuperclass
 public class Thing extends AbstractPersistable<Long> {
 
-    @org.hibernate.validator.constraints.URL
+//    @org.hibernate.validator.constraints.URL
     private URL url;
     private URL additionalType;
     private String alternateName;
@@ -22,11 +22,16 @@ public class Thing extends AbstractPersistable<Long> {
     @Column(length=255)
     private String name;
 //    private Action potentialAction;
-    @org.hibernate.validator.constraints.URL
+//   s
     private URL sameAs;
 
     @Version
     private Integer version;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdDate = new Date();
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastmodifiedDate = new Date();
 
 
     public URL getAdditionalType() {
@@ -93,4 +98,20 @@ public class Thing extends AbstractPersistable<Long> {
         this.version = version;
     }
 
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Date getLastmodifiedDate() {
+        return lastmodifiedDate;
+    }
+
+    public void setLastmodifiedDate(Date lastmodifiedDate) {
+        this.lastmodifiedDate = lastmodifiedDate;
+    }
 }
