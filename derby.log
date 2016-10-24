@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Mon Apr 04 01:34:24 EDT 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): instance a816c00e-0153-dfc3-cc1f-00001634d840 
+on database directory /Users/pfisher/Developer/Workspace/book/audioManager/audiomanager with class loader sun.misc.Launcher$AppClassLoader@14dad5dc 
+Loaded from file:/Users/pfisher/.m2/repository/org/apache/derby/derby/10.11.1.1/derby-10.11.1.1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_45-b14
+user.dir=/Users/pfisher/Developer/Workspace/book/audioManager
+os.name=Mac OS X
+os.arch=x86_64
+os.version=10.10.3
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
